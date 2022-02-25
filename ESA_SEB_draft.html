@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>ESA_SEB_draft.knit</title>
+
+<script src="ESA_SEB_draft_files/header-attrs-2.11/header-attrs.js"></script>
+
+
+
+
+
+
+<!--
+Font-awesome icons ie github or twitter
+-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv" crossorigin="anonymous">
+
+<!--
+Google fonts api stuff
+-->
+<link href='https://fonts.googleapis.com/css?family=Verdana' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Verdana' rel='stylesheet'>
+
+<!--
+Here are the required style attributes for css to make this poster work :)
+-->
+<style>
+@page {
+size: 46in 32in;
+margin: 0;
+padding: 0;
+background-color: #ffffff;
+}
+body {
+margin: 0px;
+padding: 0px;
+width: 46in;
+height: 32in;
+text-align: justify;
+font-size: 45px;
+background-color: #FFFFFF;
+color: #000000;
+}
+/* RMarkdown Class Styles */
+/* center align leaflet map,
+from https://stackoverflow.com/questions/52112119/center-leaflet-in-a-rmarkdown-document */
+.html-widget {
+margin: auto;
+position: sticky;
+margin-top: 2cm;
+margin-bottom: 2cm;
+}
+.leaflet.html-widget.html-widget-static-bound.leaflet-container.leaflet-touch.leaflet-fade-anim.leaflet-grab.leaflet-touch-drag.leaflet-touch-zoom {
+position: sticky;
+width: 100%;
+}
+pre.sourceCode.r {
+background-color: #dddddd40;
+border-radius: 4mm;
+padding: 4mm;
+width: 75%;
+margin: auto;
+margin-top: 1em;
+margin-bottom: 1em;
+/* align-items: center; */
+}
+code.sourceCode.r{
+background-color: transparent;
+font-size: 20pt;
+border-radius: 2mm;
+}
+code {
+font-size: 25pt;
+font-family: monospace;
+background-color: #00808024;
+color: #0b4545;
+padding: 1.2mm;
+line-height: 1;
+border-radius: 2mm;
+}
+caption {
+margin-bottom: 10px;
+font-size: 20pt;
+font-style: italic;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #0b454520;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+  border-spacing: 0;
+  font-size: 40%;
+  border-style: none;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 1em;
+  padding-left: 1em;
+  line-height: 1em;
+}
+table {
+  margin: auto;
+}
+th {
+  padding-left: 5mm;
+  padding-right: 5mm;
+}
+.caption {
+font-size: 20pt;
+font-style: italic;
+padding-top: 0;
+}
+.references {
+font-size: 20px;
+line-height: 90%;
+}
+/* Create three unequal columns that floats next to each other */
+.column {
+float: left;
+padding: 0px;
+}
+.outer {
+width: 46in;
+height: 32in;
+-webkit-column-count: 2; /* Chrome, Safari, Opera */
+-moz-column-count: 2; /* Firefox */
+column-count: 2;
+-webkit-column-fill: auto;
+-moz-column-fill: auto;
+column-fill: auto;
+-webkit-column-rule-width: 50%;
+-moz-column-rule-width: 50%;
+column-rule-width: 50%;
+-webkit-column-rule-style: solid;
+-moz-column-rule-style: solid;
+column-rule-style: solid;
+-webkit-column-rule-color: black;
+-moz-column-rule-color: black;
+column-rule-color: black;
+-webkit-column-gap: 50%;
+background-color: #ffffff;
+font-family: Verdana;
+color: #000000;
+}
+span.citation {
+  color: #008080;
+  font-weight: bold;
+}
+a {
+text-decoration: none;
+color: #008080;
+}
+#title {
+font-size: 125pt;
+text-align: left;
+margin: 0;
+line-height: 90%;
+border-bottom: 0;
+}
+#author {
+color: #0b4545;
+margin: 0;
+line-height: 90%;
+font-size: 1.17em;
+}
+#affiliation {
+padding-top: 1em;
+color: #00000060;
+font-style: italic;
+font-size: 25px;
+margin: 0;
+}
+sup {
+color: #cc0000;
+}
+.affiliation sup {
+font-size: 20px;
+}
+.author sup {
+font-size: 30px;
+}
+.author_extra {
+color: #008080;
+margin: 0;
+line-height: 85%;
+font-size: 35px;
+}
+.outer h1 {
+text-align: center;
+margin-top: 0.5in;
+margin-bottom: 0.5in;
+}
+.outer h2 {
+text-align: center;
+}
+.outer p {
+color: #000000;
+}
+.outer ol {
+text-align: left;
+}
+.main {
+width: calc(46in / 2);
+height: 32in;
+position: absolute;
+margin-left: calc(46in / 4);
+background-color: #0b4545;
+color: #FFFFFF90;
+font-family: Verdana;
+background-image: linear-gradient(#0b4545 50%, #008080);
+}
+.main strong {
+color: #FFFFFF;
+}
+img.main-img-left {
+width: 20%;
+left: 0.5in;
+bottom: 0.2in;
+position: absolute;
+}
+img.main-img-right {
+width: 18%;
+right: 0.5in;
+bottom: 0.2in;
+position: absolute;
+}
+.main p {
+padding-top: 20%;
+font-size: 140px;
+text-align: left;
+}
+.fab {
+color: #00000060;
+font-size: 25px;
+}
+.twitter, i {
+color: #00000060;
+font-size: 35px;
+text-decoration: none;
+}
+a.email {
+text-decoration: none;
+color: #00000060;
+font-size: 35px;
+}
+.envelope {
+color: #00000060;
+font-size: 5px;
+text-decoration: none;
+}
+.poster_wrap {
+width: 46in;
+height: 32in;
+padding: 0cm;
+background-color: #ffffff;
+}
+span > #tab:mytable {
+  font-weight: bold;
+}
+.section {
+  padding-left: 10mm;
+  padding-right: 10mm;
+}
+.main p {
+  padding-left: 30mm;
+  padding-right: 30mm;
+}
+.main_pic {
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.orcid img {
+  width: 3%;
+}
+</style>
+</head>
+<body>
+
+
+<div class="poster_wrap">
+<div class="column outer">
+<br>
+<div class="title section">
+<h3 id="author" class="author">
+
+Austin N. Fife<sup> 1, <a class="orcid" href="https://orcid.org/0000-0003-4102-3375"><img src="https://raw.githubusercontent.com/brentthorne/posterdown/master/images/orcid.jpg"></a></sup><br>
+<a class="twitter" href="https://mobile.twitter.com/arthrofaff"><i class="fab fa-twitter"></i>&nbsp;&nbsp;@arthrofaff</a><br>
+
+<a class='envelope'><i class="fas fa-envelope"></i></a> <a href="mailto:austin.fife@fdacs.gov" class="email">austin.fife@fdacs.gov</a> <br>
+   </h3>
+
+<h5 id="author_extra" class="author_extra">
+ Michael Murphy<sup>1</sup>
+ Emily Kraus<sup>1</sup>
+ Eric Rohrig<sup>1</sup>
+</h5>
+
+<p id="affiliation" class="affiliation">
+<sup>1</sup> Bureau of Methods Development and Biological Control - Florida Department of Agriculture and Consumer Services - Division of Plant Industry
+</p>
+
+</div>
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>The Asian citrus psyllid, <em>Diaphorina citri</em> (Kuwayama) (Hemiptera: Liviidae) is one of the greatest threats to the citrus industry, because it acts as the primary vector for <em>Candidatus</em> Liberibacter asiaticus (<em>Alphaproteobacteria</em>), the bacteria which causes Citrus Greening Disease or Huanglongbing (HLB) <span class="citation">(<a href="#ref-Bove2006" role="doc-biblioref">Bové 2006</a>)</span>. No cultivars of citrus have been found to be fully resistant to HLB [@]. High levels of infection reduce tree productivity and eventually kill the host plant. The Dundee Biological Control Laboratory is primarily responsible for the rearing and release of <em>Tamarixia radiata</em>, a parasitoid wasp of <em>D. citri</em> nymphs <span class="citation">(<a href="#ref-Qureshi2014" role="doc-biblioref">Qureshi et al. 2014</a>)</span>.</p>
+<p>Citrus psyllids prefer <em>Murraya paniculata</em> <span class="citation">(<a href="#ref-Ikeda2008" role="doc-biblioref">Ikeda and Ashihara 2008</a>)</span>, and psyllids raised on <em>Murraya</em> have lower levels of HLB <span class="citation">(<a href="#ref-Walter2012" role="doc-biblioref">Walter et al. 2012b</a>, <a href="#ref-Walter2012a" role="doc-biblioref">2012a</a>)</span></p>
+</div>
+<div id="objectives" class="section level3">
+<h3>Objectives</h3>
+<ol style="list-style-type: decimal">
+<li>Pick a template layout.</li>
+<li>Write/ create your poster content distraction free.</li>
+<li>Let posterdown do its thing!</li>
+</ol>
+</div>
+<div id="methods" class="section level3">
+<h3>Methods</h3>
+<p>I will show here how to include poster elements that may be useful, such as an equation using mathjax:</p>
+<p><span class="math display">\[
+E = mc^2
+\]</span></p>
+<p>For example this package is built on top of the wonderful {pagedown} package and I will cite it at the end of this sentance using this in the rmd <code>[@R-pagedown]</code> <span class="citation">(<a href="#ref-R-pagedown" role="doc-biblioref"><strong>R-pagedown?</strong></a>)</span>.</p>
+<p>To get a better understanding of how to include features like these please refer to the {posterdown} <a href="https://github.com/posterdown/wiki">wiki</a>.</p>
+<p><strong><em>Now on to the results!</em></strong></p>
+<p><br></p>
+</div>
+<div id="results" class="section level3">
+<h3>Results</h3>
+<p>Here you may have some figures to show off, bellow I have made a scatterplot with the infamous Iris dataset and I can even reference to the figure automatically like this, <code>Figure \@ref(fig:irisfigure)</code>, Figure <a href="#fig:irisfigure">1</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:irisfigure"></span>
+<img src="ESA_SEB_draft_files/figure-html/irisfigure-1.png" alt="Here is a caption for the figure. This can be added by using the &quot;fig.cap&quot; option in the r code chunk options, see this [link](https://yihui.name/knitr/options/#plots) from the legend himself, [Yihui Xie](https://twitter.com/xieyihui)." width="80%" />
+<p class="caption">
+Figure 1: Here is a caption for the figure. This can be added by using the “fig.cap” option in the r code chunk options, see this <a href="https://yihui.name/knitr/options/#plots">link</a> from the legend himself, <a href="https://twitter.com/xieyihui">Yihui Xie</a>.
+</p>
+</div>
+<p>Maybe you want to show off some of that fancy code you spent so much time on to make that figure, well you can do that too! Just use the <code>echo=TRUE</code> option in the r code chunk options, Figure <a href="#fig:myprettycode">2</a>!</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:myprettycode"></span>
+<img src="ESA_SEB_draft_files/figure-html/myprettycode-1.png" alt="Boxplots, so hot right now!" width="80%" />
+<p class="caption">
+Figure 2: Boxplots, so hot right now!
+</p>
+</div>
+<p>How about a neat table of data? See, Table <a href="#tab:iristable">1</a>:</p>
+<table>
+<caption>
+<span id="tab:iristable">Table 1: </span>A table made with the <strong>knitr::kable</strong> function.
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Sepal <br> Length
+</th>
+<th style="text-align:center;">
+Sepal <br> Width
+</th>
+<th style="text-align:center;">
+Petal <br> Length
+</th>
+<th style="text-align:center;">
+Petal <br> Width
+</th>
+<th style="text-align:center;">
+Species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+5.1
+</td>
+<td style="text-align:center;">
+3.5
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.9
+</td>
+<td style="text-align:center;">
+3.0
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.7
+</td>
+<td style="text-align:center;">
+3.2
+</td>
+<td style="text-align:center;">
+1.3
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.6
+</td>
+<td style="text-align:center;">
+3.1
+</td>
+<td style="text-align:center;">
+1.5
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.0
+</td>
+<td style="text-align:center;">
+3.6
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.4
+</td>
+<td style="text-align:center;">
+3.9
+</td>
+<td style="text-align:center;">
+1.7
+</td>
+<td style="text-align:center;">
+0.4
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.6
+</td>
+<td style="text-align:center;">
+3.4
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.3
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.0
+</td>
+<td style="text-align:center;">
+3.4
+</td>
+<td style="text-align:center;">
+1.5
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+</tbody>
+</table>
+<p>Rmarkdown template provided by <span class="citation">Thorne (<a href="#ref-Thorne2019" role="doc-biblioref">2019</a>)</span></p>
+</div>
+<div id="references" class="section level3 unnumbered">
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="1" line-spacing="2">
+<div id="ref-Bove2006" class="csl-entry">
+<strong>Bové, J. M.</strong> <strong>2006</strong>. <a href="https://www.jstor.org/stable/41998278">Huanglongbing: A destructive, newly-emerging, century-old disease of citrus</a>. Journal of Plant Pathology. 88: 7–37.
+</div>
+<div id="ref-Ikeda2008" class="csl-entry">
+<strong>Ikeda, K., and W. Ashihara</strong>. <strong>2008</strong>. Preference of Adult Asian Citrus Psyllid, <em>Diaphorina citri</em> (Homoptera: Psyllidae) for <em>Murraya paniculata</em> and <em>Citrus unshiu</em>. Jpn. J. Appl. Entomol. Zool. 52: 27–30, DOI:<a href="https://doi.org/dfk5dw">dfk5dw</a>.
+</div>
+<div id="ref-Qureshi2014" class="csl-entry">
+<strong>Qureshi, J. A., E. A. Rohrig, R. J. Stuart, D. G. Hall, N. C. Leppla, and P. A. Stansly</strong>. <strong>2014</strong>. Imported parasitoids for biological control of <span>Asian</span> citrus psyllid. CITRUS INDUSTRY. 3.
+</div>
+<div id="ref-Thorne2019" class="csl-entry">
+<strong>Thorne, B.</strong> <strong>2019</strong>. <a href="https://github.com/brentthorne/posterdown">Posterdown: <span>Generate PDF</span> conference posters using r markdown</a>.
+</div>
+<div id="ref-Walter2012a" class="csl-entry">
+<strong>Walter, A. J., Y. Duan, and D. G. Hall</strong>. <strong>2012a</strong>. Titers of <span>“<span><em>Ca</em></span><span><em>.</em></span> <span>Liberibacter</span> asiaticus”</span> in <span> <em></em> </span><span><em>Murraya</em></span><span> <em>Paniculata</em></span> and <span> <em></em> </span><span><em>Murraya</em></span>-reared <span><em>Diaphorina</em></span><span> <em>Citri</em></span> <span>Are Much Lower</span> than in <span>Citrus</span> and <span class="nocase">Citrus-reared Psyllids</span>. horts. 47: 1449–1452, DOI:<a href="https://doi.org/gpjvj2">gpjvj2</a>.
+</div>
+<div id="ref-Walter2012" class="csl-entry">
+<strong>Walter, A. J., D. G. Hall, and Y. P. Duan</strong>. <strong>2012b</strong>. Low <span>Incidence</span> of <span>“<span><em>Candidatus</em></span> <span>Liberibacter</span> asiaticus”</span> in <span> <em></em> </span><span><em>Murraya</em></span><span> <em>Paniculata</em></span> and <span>Associated</span> <span> <em></em> </span><span><em>Diaphorina</em></span><span> <em>Citri</em></span>. Plant Disease. 96: 827–832, DOI:<a href="https://doi.org/fzfmpw">fzfmpw</a>.
+</div>
+</div>
+</div>
+
+</div>
+<div class="main">
+<p>Two Hosts are better than one? <strong>Combined plantings</strong> of Orange Jasmine and Curry Tree <strong>produces more parasitoid wasps</strong> (<em>Tamarixia radiata</em> Waterson [Hymenoptera Eulophidae])<br><br> <img src="https://raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png" class="main_pic" /></p>
+<img src="https://raw.githubusercontent.com/brentthorne/posterdown/master/images/qr-code-black.png" class="main-img-left" />
+<img src="https://raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png" class="main-img-right" />
+</div>
+</div>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+var script = document.createElement("script");
+script.type = "text/javascript";
+var src = "true";
+if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+if (location.protocol !== "file:" && /^https?:/.test(src))
+src = src.replace(/^https?:/, '');
+script.src = src;
+document.getElementsByTagName("head")[0].appendChild(script);
+})();
+</script>
+
+
+</body>
+</html>
