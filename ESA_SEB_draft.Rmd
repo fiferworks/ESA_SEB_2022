@@ -16,10 +16,10 @@ affiliation:
   - num: 1
     address: Bureau of Methods Development and Biological Control - Florida Department of Agriculture and Consumer Services - Division of Plant Industry
 main_findings:
-  - "Two Hosts are better than one? **Combined plantings** of Orange Jasmine and Curry Tree **produces more parasitoid wasps** (*Tamarixia radiata* Waterson [Hymenoptera Eulophidae])"
+  - "Two Hosts are better than one? **Combined plantings of host plants** Orange Jasmine and Curry Tree **produces more parasitoid wasps** (*Tamarixia radiata* Waterson [Hymenoptera Eulophidae]) on average **than either plant alone**"
   - '![](https://raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png){.main_pic}'
-logoleft_name: '![](https://raw.githubusercontent.com/brentthorne/posterdown/master/images/qr-code-black.png){.main-img-left}'
-logoright_name: '![](https://raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png){.main-img-right}'
+# logoleft_name: '![](https://raw.githubusercontent.com/brentthorne/posterdown/master/images/qr-code-black.png){.main-img-left}'
+# logoright_name: '![](https://raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png){.main-img-right}'
 font_family: Verdana
 main_width: 0.5
 main_fontfamily: Verdana
@@ -65,17 +65,17 @@ lapply(pkgs, library, character.only = TRUE)
 rm(pkgs, nu_pkgs)
 ```
 
-```{r myplot, include=FALSE}
-svg('myplot.svg')
-plot(iris$Sepal.Length, iris$Sepal.Width)
-dev.off()
-```
-
 ### Introduction
-The Asian citrus psyllid, *Diaphorina citri* (Kuwayama) (Hemiptera: Liviidae) is one of the greatest threats to the citrus industry, because it acts as the primary vector for *Candidatus* Liberibacter asiaticus (*Alphaproteobacteria*), the bacteria which causes Citrus Greening Disease or Huanglongbing (HLB) [@Bove2006]. No cultivars of citrus have been found to be fully resistant to HLB [@]. High levels of infection reduce tree productivity and eventually kill the host plant. The Dundee Biological Control Laboratory is primarily responsible for the rearing and release of *Tamarixia radiata*, a parasitoid wasp of *D. citri* nymphs [@Qureshi2014].
+
+The Asian citrus psyllid, *Diaphorina citri* (Kuwayama) (Hemiptera: Liviidae) is one of the greatest threats to the citrus industry, because it acts as the primary vector for *Candidatus* Liberibacter asiaticus (*Alphaproteobacteria*), the bacteria which causes Citrus Greening Disease or Huanglongbing (HLB) [@Bove2006]. No cultivars of citrus have been found to be fully resistant to HLB [@Graham2020]. High levels of infection reduce tree productivity and eventually kill the host plant. The Dundee Biological Control Laboratory is primarily responsible for the rearing and release of *Tamarixia radiata*, a parasitoid wasp of *D. citri* nymphs [@Qureshi2014].
 
 
 Citrus psyllids prefer *Murraya paniculata* [@Ikeda2008], and psyllids raised on *Murraya* have lower levels of HLB [@Walter2012; @Walter2012a]
+
+The curry tree *Begera (Murraya) koenigii* L. is thought to be the original host plant for *D. citri*
+
+
+@Devi2013 found that although nymphal development was similar for  *D. citri* on *B. koenigii*, *Citrus reticulata* Blanco (Kinnow Mandrin) and *Citrus jambhiri* Lush (Rough Lemon), psyllids laid significantly fewer eggs on *B. koenigii*.
 
 ### Objectives
 
@@ -85,17 +85,7 @@ Citrus psyllids prefer *Murraya paniculata* [@Ikeda2008], and psyllids raised on
 
 ### Methods
 
-I will show here how to include poster elements that may be useful, such as an equation using mathjax:
-
-$$
-E = mc^2
-$$
-
-For example this package is built on top of the wonderful {pagedown} package and I will cite it at the end of this sentance using this in the rmd `[@R-pagedown]` [@R-pagedown].
-
-To get a better understanding of how to include features like these please refer to the {posterdown} [wiki](https://github.com/posterdown/wiki).
-
-**_Now on to the results!_**
+test
 
 <br>
 
@@ -103,31 +93,37 @@ To get a better understanding of how to include features like these please refer
 
 Maybe you want to show off some of that fancy code you spent so much time on to make that figure, well you can do that too! Just use the `echo=TRUE` option in the r code chunk options, Figure \@ref(fig:myprettycode)!
 
-```{r myprettycode, echo=FALSE,collapse=TRUE, fig.cap='Boxplots, so hot right now!', fig.height=3.5, out.width="80%"}
+```{r plot, echo=FALSE,collapse=TRUE, fig.cap='Boxplots, so hot right now!', out.width="80%"}
 df <-
   read_csv("clean_tam_yield_datasheet.csv",
            col_types = c("ff?????fff?fD"))
-
-df$month <- month(df$date)
-df$year <- year(df$date)
-
-ggplot(data = df, mapping = aes(plant, tam_ct)) +
-  geom_boxplot()
+ggplot(data = df,
+       mapping = aes(plant, tam_ct, fill = plant)) +
+  ggtitle(
+    substitute(
+      'Yields of' ~ italic(tam) ~ 'produced from' ~ italic(dcit) ~ 'reared on different hosts',
+      list(tam = 'Tamarixia radiata', dcit = 'D. citri')
+    )
+  ) +
+  theme(legend.position = "none", axis.title.y = element_blank()) +
+  geom_boxplot(notch = T) +
+  geom_violin() +
+  coord_flip()
 ```
 
-How about a neat table of data? See, Table \@ref(tab:iristable):
+<!-- How about a neat table of data? See, Table \@ref(tab:iristable): -->
 
-```{r, iristable}
-knitr::kable(
-  iris[1:8,1:5], format = "html",
-  caption = "A table made with the **knitr::kable** function.",
-  align = "c", col.names = c("Sepal <br> Length",
-                             "Sepal <br> Width",
-                             "Petal <br> Length",
-                             "Petal <br> Width",
-                             "Species"),
-  escape = FALSE)
-```
+<!-- ```{r, iristable} -->
+<!-- knitr::kable( -->
+<!--   iris[1:8,1:5], format = "html", -->
+<!--   caption = "A table made with the **knitr::kable** function.", -->
+<!--   align = "c", col.names = c("Sepal <br> Length", -->
+<!--                              "Sepal <br> Width", -->
+<!--                              "Petal <br> Length", -->
+<!--                              "Petal <br> Width", -->
+<!--                              "Species"), -->
+<!--   escape = FALSE) -->
+<!-- ``` -->
 
 Rmarkdown template provided by @Thorne2019
 
