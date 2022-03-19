@@ -17,7 +17,7 @@ affiliation:
     address: Bureau of Methods Development and Biological Control - Florida Department of Agriculture and Consumer Services - Division of Plant Industry
 main_findings:
   - "Two Hosts are better than one? **Combined plantings of host plants** Orange Jasmine and Curry Tree **produces more parasitoid wasps** (*Tamarixia radiata* Waterson [Hymenoptera Eulophidae]) on average **than either plant alone**"
-  - '![](https://raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png){.main_pic}'
+  - '![](tam_mixed_hosts.svg){.main_pic}'
 # logoleft_name: '![](https://raw.githubusercontent.com/brentthorne/posterdown/master/images/qr-code-black.png){.main-img-left}'
 # logoright_name: '![](https://raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png){.main-img-right}'
 font_family: Verdana

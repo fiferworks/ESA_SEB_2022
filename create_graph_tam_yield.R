@@ -10,7 +10,8 @@ pkgs <-
     "readr",
     "forcats",
     "ggplot2",
-    "ggthemes"
+    "ggthemes",
+    "svglite"
   )
 
 # installs missing packages
@@ -52,11 +53,9 @@ ggplot(data = df,
 
 # saving the file
 ggsave(
-  'tam_mixed_hosts.png',
+  'tam_mixed_hosts.svg',
   plot = last_plot(),
-  type = "cairo",
   width = 16,
   height = 9,
   scale = 1,
-  dpi = 300
 )
