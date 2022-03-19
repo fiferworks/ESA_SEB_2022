@@ -53,7 +53,8 @@ pkgs <-
     "dplyr",
     "readr",
     "forcats",
-    "ggplot2")
+    "ggplot2",
+    "ggthemes")
 
 # installs missing packages
 nu_pkgs <- pkgs[!(pkgs %in% installed.packages()[, "Package"])]
@@ -93,7 +94,7 @@ test
 
 Maybe you want to show off some of that fancy code you spent so much time on to make that figure, well you can do that too! Just use the `echo=TRUE` option in the r code chunk options, Figure \@ref(fig:myprettycode)!
 
-```{r plot, echo=FALSE,collapse=TRUE, fig.cap='Boxplots, so hot right now!', out.width="80%"}
+```{r plot, echo=FALSE,collapse=TRUE, fig.cap='Boxplots, so hot right now!', out.width="90%"}
 df <-
   read_csv("clean_tam_yield_datasheet.csv",
            col_types = c("ff?????fff?fD"))
@@ -101,14 +102,26 @@ ggplot(data = df,
        mapping = aes(plant, tam_ct, fill = plant)) +
   ggtitle(
     substitute(
-      'Yields of' ~ italic(tam) ~ 'produced from' ~ italic(dcit) ~ 'reared on different hosts',
-      list(tam = 'Tamarixia radiata', dcit = 'D. citri')
+      ~ italic(tam) ~ 'from' ~ italic(dcit) ~ 'colonies with different hosts',
+      list(tam = 'T. radiata', dcit = 'D. citri')
     )
   ) +
-  theme(legend.position = "none", axis.title.y = element_blank()) +
+  theme_tufte(base_size = 15) +
+  theme(
+    legend.position = "none",
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
+  ) +
   geom_boxplot(notch = T) +
   geom_violin() +
-  coord_flip()
+  coord_flip(ylim = c(0, 1250))
+# annotate(
+#   geom = "text",
+#   size = 15,
+#   x = 2,
+#   y = 100,
+#   label = "***",
+#   color = "black")
 ```
 
 <!-- How about a neat table of data? See, Table \@ref(tab:iristable): -->
